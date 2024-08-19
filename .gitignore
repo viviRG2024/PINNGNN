@@ -164,3 +164,5 @@ cython_debug/
 /data/input/cities/innsbruck
 /data/input/cities
 /utils/plot
+/data/input/pems04
+/data/input/pems08

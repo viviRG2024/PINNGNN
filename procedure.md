@@ -7,11 +7,5 @@
 - [get traffic data from sensor value](./utils/pre-process/attachSensorOnRoads.py)
 - [transfer to npz and csv data](./utils/pre-process/mergeRoadAndSensorValue.py)
 
-- transfer into csv and npz, 
-- convert to related matrix
-
 # Trainning
 - [trainning model](./utils/trainning/trainModel.py)
-
-# Plot
-- [plot the result](./utils/plot/plotResult.py)

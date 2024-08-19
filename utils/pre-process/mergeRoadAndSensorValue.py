@@ -160,6 +160,7 @@ if __name__ == '__main__':
 
     for city in cities:
         city_dir= os.path.join(base_folder, city)
+        print(f"Processing data for {city}")
         process_city_data(city, city_dir)
-    
+        
     print('Time cost: %.2f s' % (time.time() - t_start))

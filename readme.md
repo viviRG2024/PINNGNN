@@ -43,7 +43,7 @@ pip install -r requirements.txt
 
 ### Download Data
 
-You can download data from [google drive](https://github.com/zezhishao/BasicTS/tree/master) and unzip it.
+You can download data from [google drive](https://drive.google.com/drive/folders/1MdanT33AUzmeeuTjKfq7eK_YgkIK-Zps?usp=drive_link) and unzip it.
 
 ### Preparing Data
 
@@ -125,7 +125,3 @@ If you use this code in your project, please consider citing the following paper
 
 ## License
 Please see the [license](LICENSE) for further details.
-
-## Note
-
-The implemention is based on *[basicTS](https://github.com/Khrylx/Transform2Act)*.
