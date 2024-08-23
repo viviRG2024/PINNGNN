@@ -4,7 +4,7 @@ import torch
 from easydict import EasyDict
 from basicts.runners import SimpleTimeSeriesForecastingRunner
 from basicts.data import TimeSeriesForecastingDataset
-from basicts.losses import masked_mae
+from basicts.losses import masked_mae,pinngnn_physics_loss
 from basicts.utils import load_adj
 
 from .arch import PINNsGNN
@@ -47,7 +47,7 @@ CFG.MODEL.FORWARD_FEATURES = [0, 1, 2]  # 假设我们使用流量、占有率�
 CFG.MODEL.TARGET_FEATURES = [0]
 
 CFG.TRAIN = EasyDict()
-CFG.TRAIN.LOSS = masked_mae
+CFG.TRAIN.LOSS = pinngnn_physics_loss
 CFG.TRAIN.OPTIM = EasyDict()
 CFG.TRAIN.OPTIM.TYPE = "Adam"
 CFG.TRAIN.OPTIM.PARAM = {

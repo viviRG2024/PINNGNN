@@ -158,7 +158,7 @@ if __name__ == '__main__':
     cities = config['cities']
     base_folder = r'data/input/cities'
 
-    for city in cities:
+    for city in cities[6:7]:
         city_dir= os.path.join(base_folder, city)
         print(f"Processing data for {city}")
         process_city_data(city, city_dir)

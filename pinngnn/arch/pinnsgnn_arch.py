@@ -29,8 +29,46 @@ class PINNsGNN(nn.Module):
         x = x.permute(0, 2, 3, 1).contiguous()
         return {"prediction": x}
     
-    def calculate_physics_loss(self, pred, true, occupy, speed):
-        # physics constraint
-        estimated_flow = (occupy / 100) * speed
-        physics_loss = nn.MSELoss()(estimated_flow, true) + nn.MSELoss()(pred, true)
+    def calculate_physics_loss(self, pred, occupy, speed, dt=1, dx=1, v_f=30, rho_max=100):
+        """
+        Calculate physics-based loss using the LWR model
+        
+        Parameters:
+        pred: predicted flow
+        occupy: occupancy (density)
+        speed: velocity
+        dt: time step
+        dx: space step
+        v_f: free flow speed
+        rho_max: maximum density
+        """
+        # 1. Conservation equation loss
+        rho = occupy / 100  # Convert occupancy to density
+        q = pred
+        continuity_loss = torch.mean(torch.abs(
+            (rho[:, 1:, :] - rho[:, :-1, :]) / dt + 
+            (q[:, :, 1:] - q[:, :, :-1]) / dx
+        ))
+
+        # 2. Fundamental diagram relationship loss
+        fundamental_diagram_loss = torch.mean((q - rho * speed)**2)
+
+        # 3. Speed-density relationship loss
+        speed_density_loss = torch.mean((speed - v_f * (1 - rho / rho_max))**2)
+
+        # 4. Temporal consistency loss
+        temporal_consistency_loss = torch.mean(
+            (rho[:, 1:, :] - rho[:, :-1, :])**2 + 
+            (speed[:, 1:, :] - speed[:, :-1, :])**2 + 
+            (q[:, 1:, :] - q[:, :-1, :])**2
+        )
+
+        # Combine all physics losses
+        physics_loss = (
+            0.1 * continuity_loss + 
+            0.1 * fundamental_diagram_loss + 
+            0.1 * speed_density_loss + 
+            0.1 * temporal_consistency_loss
+        )
+
         return physics_loss
