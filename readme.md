@@ -43,7 +43,7 @@ pip install -r requirements.txt
 
 ### Download Data
 
-You can download data from [google drive](https://drive.google.com/drive/folders/1MdanT33AUzmeeuTjKfq7eK_YgkIK-Zps?usp=drive_link) and unzip it.
+You can download data from [google drive](https://drive.google.com/drive/folders/1F7vzXht4A9tWgiX5Jens-vGLirgVVGti?usp=drive_link) and unzip it.
 
 ### Preparing Data
 
